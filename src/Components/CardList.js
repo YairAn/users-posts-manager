@@ -3,9 +3,11 @@ import PostCard from "./PostCard";
 
 const CardList = ({ list, user, onClick, onDelete}) =>
 {      
-    if(user) {
+    if(user) {       
+        const name = list.find(item => item.userId === user);
         return(
             <div>
+             <h1>{`${name.name}'s posts`}</h1>
                  {
                   list.filter(item => item.userId === user)
                   .map((post, i) => {
@@ -22,8 +24,10 @@ const CardList = ({ list, user, onClick, onDelete}) =>
             }
             </div>
         ); 
-    } else return(
+    } else {
+        return(
         <div>
+            <h1>users</h1>
              {
               list.map((user, i) => {
               return (
@@ -41,7 +45,7 @@ const CardList = ({ list, user, onClick, onDelete}) =>
           })   
         }
         </div> 
-        ); 
+        ); }
  }
 
 

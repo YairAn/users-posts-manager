@@ -1,7 +1,8 @@
 
 const PostCard = (props) => {
     return (
-      <div className='tc bg-light-blue dib br3 pa3 ma2 grow bw2 shadow-5'>
+      <div className='tc bg-light-blue dib br3 pa3 ma2 bw2 shadow-5'>
+        <button className='tc fr' onClick={() => props.onDelete(props.id)}>X</button>
         <div>
             <h3>{props.title}</h3>
             <p>{props.body}</p>

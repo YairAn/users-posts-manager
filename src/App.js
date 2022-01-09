@@ -27,18 +27,25 @@ function App() {
   }
 
   function onUserDelete(id){
-    setUsers(users.filter((item) => item.id !== id));
-    setPosts(posts.filter((item) => item.userId !== id));
+    setUsers(users => users.filter((item) => item.id !== id));
+    setPosts(posts => posts.filter((item) => item.userId !== id));
+  }
+
+  function onPostClick(id){
+    setCurrentUserId(id);
+  }
+
+  function onPostDelete(id){
+    setPosts(posts => posts.filter((item) => item.id !== id));
   }
 
   
-  
   return (
     <div className="tc">
-      {currenrUserId < 0 ?
+      { currenrUserId < 0 ?
         <CardList list={users} onClick={onUserClick} onDelete={onUserDelete}/>
-        :
-        <CardList list={posts} user={currenrUserId}/>
+        : 
+        <CardList list={posts} user={currenrUserId} onClick={onPostClick} onDelete={onPostDelete} />        
       }
     </div>
   );
