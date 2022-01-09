@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import CardList from './Components/CardList';
+import Navigation from './Components/Navigation';
+
 import './App.css';
 
 function App() {
@@ -39,13 +41,19 @@ function App() {
     setPosts(posts => posts.filter((item) => item.id !== id));
   }
 
-  
+  function onRouteChange(id){
+    setCurrentUserId(id);
+  }
+
   return (
     <div className="tc">
       { currenrUserId < 0 ?
         <CardList list={users} onClick={onUserClick} onDelete={onUserDelete}/>
         : 
-        <CardList list={posts} user={currenrUserId} onClick={onPostClick} onDelete={onPostDelete} />        
+        <div>
+         <Navigation onRouteChange={onRouteChange} />      
+         <CardList list={posts} user={currenrUserId} onClick={onPostClick} onDelete={onPostDelete} />        
+        </div>
       }
     </div>
   );

@@ -2,8 +2,8 @@
 const UserCard = (props) => {
     return (
       <div className='tc bg-light-blue dib br3 pa3 ma2 bw2 shadow-5'>
-       <button className='tc fr' onClick={() => props.onDelete(props.id)}>X</button>
-       <img src={`https://robohash.org/${props.id}?size=100x100`}
+       <button className='tc fr pointer' onClick={() => props.onDelete(props.id)}>X</button>
+       <img className='pointer' src={`https://robohash.org/${props.id}?size=100x100`}
        onClick = {() => props.onClick(props.id)} />
         <div>
             <h3>{`${props.name}(${props.userName})`}</h3>

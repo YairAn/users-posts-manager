@@ -3,7 +3,7 @@ import PostCard from "./PostCard";
 
 const CardList = ({ list, user, onClick, onDelete}) =>
 {      
-    if(user) {       
+    if(user) { 
         const name = list.find(item => item.userId === user);
         return(
             <div>
@@ -13,9 +13,9 @@ const CardList = ({ list, user, onClick, onDelete}) =>
                   .map((post, i) => {
                   return (
                      <PostCard key={i}
-                      id={list[i].id}
-                      title={list[i].title}
-                      body = {list[i].body}
+                      id={post.id}
+                      title={post.title}
+                      body = {post.body}
                       onClick ={onClick}
                       onDelete={onDelete}
                       />
@@ -27,7 +27,7 @@ const CardList = ({ list, user, onClick, onDelete}) =>
     } else {
         return(
         <div>
-            <h1>users</h1>
+            <h1>Users</h1>
              {
               list.map((user, i) => {
               return (
