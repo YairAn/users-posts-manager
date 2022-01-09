@@ -1,13 +1,13 @@
 import UserCard from "./UserCard";
 import PostCard from "./PostCard";
 
-const CardList = ({ list, user, onClick, onDelete}) =>
+const CardList = ({ list, user, name, onClick, onDelete}) =>
 {      
     if(user) { 
-        const name = list.find(item => item.userId === user);
         return(
             <div>
-             <h1>{`${name.name}'s posts`}</h1>
+             <h1>{`${name}'s posts`}</h1>
+             <hr></hr>
                  {
                   list.filter(item => item.userId === user)
                   .map((post, i) => {
@@ -28,6 +28,7 @@ const CardList = ({ list, user, onClick, onDelete}) =>
         return(
         <div>
             <h1>Users</h1>
+            <hr></hr>
              {
               list.map((user, i) => {
               return (

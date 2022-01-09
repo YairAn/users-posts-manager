@@ -52,7 +52,12 @@ function App() {
         : 
         <div>
          <Navigation onRouteChange={onRouteChange} />      
-         <CardList list={posts} user={currenrUserId} onClick={onPostClick} onDelete={onPostDelete} />        
+         <CardList
+          list={posts}
+          user={currenrUserId}
+          name={users.find(item => item.id === currenrUserId).name}
+          onClick={onPostClick}
+          onDelete={onPostDelete} />        
         </div>
       }
     </div>
