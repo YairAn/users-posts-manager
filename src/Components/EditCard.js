@@ -9,13 +9,19 @@ const EditCard = ({onUpdate, id, title ,body}) => {
   const [newBody, setBody] = useState(body);
   const [show, setShow] = useState(false);
 
+
+  
   const handleClose = () => {
       setShow(false);
       setTitle(title);
       setBody(body);
   }
 
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setTitle(title);
+    setBody(body);
+    setShow(true);       
+  }
 
   const handleUpdate = () => {
      onUpdate(id, newTitle, newBody);

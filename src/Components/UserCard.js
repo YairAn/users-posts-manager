@@ -6,7 +6,8 @@ const UserCard = (props) => {
        <img className='pointer' src={`https://robohash.org/${props.id}?size=100x100`}
        onClick = {() => props.onClick(props.id)} />
         <div>
-            <h3>{`${props.name}(${props.userName})`}</h3>
+            <h4>{`${props.name}`}</h4>
+            <h4>{`(${props.userName})`}</h4>
             <p>{props.email}</p>
             <p className='pointer'>{`${props.coordinates.lat}/${props.coordinates.lng}`}</p>
             <p>{props.company}</p>
