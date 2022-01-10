@@ -1,16 +1,14 @@
 import UserCard from "./UserCard";
 import PostCard from "./PostCard";
 
-const CardList = ({ list, user, name, onClick, onDelete}) =>
+const CardList = ({ list, user, onClick, onDelete, onUpdate}) =>
 {      
     if(user) { 
+        let filter = list.filter(item => item.userId === user)
         return(
             <div>
-             <h1>{`${name}'s posts`}</h1>
-             <hr></hr>
                  {
-                  list.filter(item => item.userId === user)
-                  .map((post, i) => {
+                  filter.map((post, i) => {
                   return (
                      <PostCard key={i}
                       id={post.id}
@@ -18,6 +16,7 @@ const CardList = ({ list, user, name, onClick, onDelete}) =>
                       body = {post.body}
                       onClick ={onClick}
                       onDelete={onDelete}
+                      onUpdate={onUpdate}
                       />
                   );
               })   
@@ -27,8 +26,6 @@ const CardList = ({ list, user, name, onClick, onDelete}) =>
     } else {
         return(
         <div>
-            <h1>Users</h1>
-            <hr></hr>
              {
               list.map((user, i) => {
               return (

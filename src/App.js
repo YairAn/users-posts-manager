@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import CardList from './Components/CardList';
 import Navigation from './Components/Navigation';
+import EditCard from './Components/EditCard';
 
 import './App.css';
 
@@ -33,31 +34,54 @@ function App() {
     setPosts(posts => posts.filter((item) => item.userId !== id));
   }
 
-  function onPostClick(id){
-    setCurrentUserId(id);
+  function onPostClick(){
+//     setShow(true);
   }
 
   function onPostDelete(id){
     setPosts(posts => posts.filter((item) => item.id !== id));
   }
 
+  function onPostChange(id, title, body){
+    let temp_posts = [...posts];
+    console.log(temp_posts);
+    let post = temp_posts.find(item => item.id === id);
+    let index = temp_posts.findIndex(item => item.id === id);
+
+    post.title = title;
+    post.body = body;
+    
+    temp_posts[index] = post;
+    console.log(temp_posts);
+    setPosts(temp_posts);
+  }
+
   function onRouteChange(id){
     setCurrentUserId(id);
   }
 
+
+
   return (
     <div className="tc">
       { currenrUserId < 0 ?
-        <CardList list={users} onClick={onUserClick} onDelete={onUserDelete}/>
+        <div>
+         <h1>Users</h1>
+         <hr></hr>
+         <CardList list={users} onClick={onUserClick} onDelete={onUserDelete}/>
+        </div>
         : 
         <div>
-         <Navigation onRouteChange={onRouteChange} />      
+         <Navigation onRouteChange={onRouteChange} />
+         <h1>{`${users.find(item => item.id === currenrUserId).name}'s posts`}</h1>
+         <hr></hr>      
          <CardList
           list={posts}
           user={currenrUserId}
-          name={users.find(item => item.id === currenrUserId).name}
           onClick={onPostClick}
-          onDelete={onPostDelete} />        
+          onDelete={onPostDelete}
+          onUpdate={onPostChange}
+           />        
         </div>
       }
     </div>
