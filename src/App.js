@@ -27,12 +27,16 @@ function App() {
     .then(response => response.json())
     .then(data => setPosts(data))
    }
+   if(window.sessionStorage.getItem('currentUser')){
+    setCurrentUserId(parseInt(window.sessionStorage.getItem('currentUser')));
+   }
   },[]);
 
   useEffect(() => {
     window.sessionStorage.setItem('users', JSON.stringify(users));
     window.sessionStorage.setItem('posts', JSON.stringify(posts));
-  }, [users, posts]);
+    window.sessionStorage.setItem('currentUser', String(currenrUserId));
+  }, [users, posts, currenrUserId]);
 
   
   function onUserClick(e, id){
