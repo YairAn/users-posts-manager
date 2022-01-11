@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 
 
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 
 const EditCard = ({onUpdate, id, title ,body}) => {
   
@@ -54,7 +54,7 @@ const EditCard = ({onUpdate, id, title ,body}) => {
               multiline
               rows={2}
               maxRows={Infinity}
-              autoFocus
+              autoFocus={true}
               type="text"
               value={newTitle}
               onChange={(e) => setTitle(e.target.value)}
@@ -90,7 +90,7 @@ const EditCard = ({onUpdate, id, title ,body}) => {
               }
             }}
             label="Body"
-      />              
+          />              
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>

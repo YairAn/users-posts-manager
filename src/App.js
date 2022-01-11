@@ -10,6 +10,7 @@ function App() {
   const [users,setUsers] = useState([]);
   const [posts,setPosts] = useState([]);
   const [currenrUserId,setCurrentUserId] = useState(-1);
+
   const [fetchUserOnes,setFetchUserOnes] = useState(true);
   const [fetchPostsOnes,setFetchPostsOnes] = useState(true);
 
@@ -17,19 +18,19 @@ function App() {
 
   useEffect(() => {
    if(fetchUserOnes){
-    setFetchUserOnes(false);
     fetch("https://jsonplaceholder.typicode.com/users")
     .then(response => response.json())
-    .then(data => setUsers(data))
+    .then(data => setUsers(data)
+    .then(() => setFetchUserOnes(false)))
     }
   },[]);
 
   useEffect(() => {
     if(fetchPostsOnes){
-    setFetchPostsOnes(false);
     fetch("https://jsonplaceholder.typicode.com/posts")
     .then(response => response.json())
-    .then(data => setPosts(data))
+    .then(data => setPosts(data)
+    .then(() => setFetchPostsOnes(false)))
     }
   },[]);
 
@@ -40,7 +41,6 @@ function App() {
     window.localStorage.setItem('fetchPostsOnes', (fetchPostsOnes));
   }, [users, posts, fetchUserOnes, fetchPostsOnes]);
 
-  
   useEffect(() => {
     setUsers(JSON.parse(window.localStorage.getItem('users')));
     setPosts(JSON.parse(window.localStorage.getItem('posts')));
