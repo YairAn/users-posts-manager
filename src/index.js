@@ -2,15 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Map from './Components/Map';
 import 'tachyons';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="map/:lat/:lng/:id" element={<Map />} /> 
+      <Route
+      path="*"
+      element={
+        <main style={{ padding: "1rem" }}>
+          <p>There's nothing here!</p>
+        </main>
+      }/>
+    </Routes>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

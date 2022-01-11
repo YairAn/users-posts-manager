@@ -1,3 +1,5 @@
+import { Outlet, Link } from "react-router-dom";
+
 
 const UserCard = (props) => {
     return (
@@ -9,8 +11,11 @@ const UserCard = (props) => {
             <h4>{`${props.name}`}</h4>
             <h4>{`(${props.userName})`}</h4>
             <p>{props.email}</p>
-            <p className='pointer'>{`${props.coordinates.lat}/${props.coordinates.lng}`}</p>
+            <Link to={`/map/${props.coordinates.lat}/${props.coordinates.lng}/${props.id}`}>
+              {`${props.coordinates.lat}/${props.coordinates.lng}`}
+            </Link>
             <p>{props.company}</p>
+            <Outlet />
         </div>
       </div>
     );

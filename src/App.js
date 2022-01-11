@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import CardList from './Components/CardList';
 import Navigation from './Components/Navigation';
 import EditCard from './Components/EditCard';
+import Map from './Components/Map';
 
 import './App.css';
 
@@ -10,6 +11,16 @@ function App() {
   const [users,setUsers] = useState([]);
   const [posts,setPosts] = useState([]);
   const [currenrUserId,setCurrentUserId] = useState(-1);
+
+  useEffect(() => {
+    setUsers(JSON.parse(window.localStorage.getItem('users')));
+    setPosts(JSON.parse(window.localStorage.getItem('posts')));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('users', users);
+    window.localStorage.setItem('posts', posts);
+  }, [users, posts]);
 
 
   useEffect(() => {
@@ -34,10 +45,6 @@ function App() {
     setPosts(posts => posts.filter((item) => item.userId !== id));
   }
 
-  function onPostClick(){
-//     setShow(true);
-  }
-
   function onPostDelete(id){
     setPosts(posts => posts.filter((item) => item.id !== id));
   }
@@ -50,7 +57,7 @@ function App() {
 
     post.title = title;
     post.body = body;
-    
+
     temp_posts[index] = post;
     console.log(temp_posts);
     setPosts(temp_posts);
@@ -74,14 +81,13 @@ function App() {
         <div>
          <Navigation onRouteChange={onRouteChange} />
          <h1>{`${users.find(item => item.id === currenrUserId).name}'s posts`}</h1>
-         <hr></hr>      
+         <hr></hr>     
          <CardList
           list={posts}
           user={currenrUserId}
-          onClick={onPostClick}
           onDelete={onPostDelete}
           onUpdate={onPostChange}
-           />        
+           /> 
         </div>
       }
     </div>
