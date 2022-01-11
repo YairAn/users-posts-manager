@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import CardList from './Components/CardList';
 import Navigation from './Components/Navigation';
-import EditCard from './Components/EditCard';
-import Map from './Components/Map';
+
 
 import './App.css';
 
@@ -11,30 +10,43 @@ function App() {
   const [users,setUsers] = useState([]);
   const [posts,setPosts] = useState([]);
   const [currenrUserId,setCurrentUserId] = useState(-1);
+  const [fetchUserOnes,setFetchUserOnes] = useState(true);
+  const [fetchPostsOnes,setFetchPostsOnes] = useState(true);
 
-  useEffect(() => {
-    setUsers(JSON.parse(window.localStorage.getItem('users')));
-    setPosts(JSON.parse(window.localStorage.getItem('posts')));
-  }, []);
-
-  useEffect(() => {
-    window.localStorage.setItem('users', users);
-    window.localStorage.setItem('posts', posts);
-  }, [users, posts]);
 
 
   useEffect(() => {
+   if(fetchUserOnes){
+    setFetchUserOnes(false);
     fetch("https://jsonplaceholder.typicode.com/users")
     .then(response => response.json())
     .then(data => setUsers(data))
+    }
   },[]);
 
   useEffect(() => {
+    if(fetchPostsOnes){
+    setFetchPostsOnes(false);
     fetch("https://jsonplaceholder.typicode.com/posts")
     .then(response => response.json())
     .then(data => setPosts(data))
+    }
   },[]);
 
+  useEffect(() => {
+    window.localStorage.setItem('users', JSON.stringify(users));
+    window.localStorage.setItem('posts', JSON.stringify(posts));
+    window.localStorage.setItem('fetchUserOnes', (fetchUserOnes));
+    window.localStorage.setItem('fetchPostsOnes', (fetchPostsOnes));
+  }, [users, posts, fetchUserOnes, fetchPostsOnes]);
+
+  
+  useEffect(() => {
+    setUsers(JSON.parse(window.localStorage.getItem('users')));
+    setPosts(JSON.parse(window.localStorage.getItem('posts')));
+    setFetchUserOnes((window.localStorage.getItem('fetchUserOnes')));
+    setFetchPostsOnes((window.localStorage.getItem('fetchPostsOnes')));
+  }, []);
 
   function onUserClick(id){
     setCurrentUserId(id);
