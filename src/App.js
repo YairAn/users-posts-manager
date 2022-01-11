@@ -12,16 +12,16 @@ function App() {
   const [currenrUserId,setCurrentUserId] = useState(-1);
 
   useEffect(() => {
-   if(window.localStorage.getItem('users')){
-    setUsers(JSON.parse(window.localStorage.getItem('users')));
+   if(window.sessionStorage.getItem('users')){
+    setUsers(JSON.parse(window.sessionStorage.getItem('users')));
    } else {
     fetch("https://jsonplaceholder.typicode.com/users")
     .then(response => response.json())
     .then(data => setUsers(data))
    }
 
-   if(window.localStorage.getItem('posts')){
-    setPosts(JSON.parse(window.localStorage.getItem('posts')));
+   if(window.sessionStorage.getItem('posts')){
+    setPosts(JSON.parse(window.sessionStorage.getItem('posts')));
    } else {
     fetch("https://jsonplaceholder.typicode.com/posts")
     .then(response => response.json())
@@ -30,8 +30,8 @@ function App() {
   },[]);
 
   useEffect(() => {
-    window.localStorage.setItem('users', JSON.stringify(users));
-    window.localStorage.setItem('posts', JSON.stringify(posts));
+    window.sessionStorage.setItem('users', JSON.stringify(users));
+    window.sessionStorage.setItem('posts', JSON.stringify(posts));
   }, [users, posts]);
 
   
