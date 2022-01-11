@@ -11,45 +11,37 @@ function App() {
   const [posts,setPosts] = useState([]);
   const [currenrUserId,setCurrentUserId] = useState(-1);
 
-  const [fetchUserOnes,setFetchUserOnes] = useState(true);
-  const [fetchPostsOnes,setFetchPostsOnes] = useState(true);
-
-
-
   useEffect(() => {
-   if(fetchUserOnes){
+   if(window.localStorage.getItem('users')){
+    setUsers(JSON.parse(window.localStorage.getItem('users')));
+   } else {
     fetch("https://jsonplaceholder.typicode.com/users")
     .then(response => response.json())
-    .then(data => setUsers(data)
-    .then(() => setFetchUserOnes(false)))
-    }
-  },[]);
+    .then(data => setUsers(data))
+   }
 
-  useEffect(() => {
-    if(fetchPostsOnes){
+   if(window.localStorage.getItem('posts')){
+    setPosts(JSON.parse(window.localStorage.getItem('posts')));
+   } else {
     fetch("https://jsonplaceholder.typicode.com/posts")
     .then(response => response.json())
-    .then(data => setPosts(data)
-    .then(() => setFetchPostsOnes(false)))
-    }
+    .then(data => setPosts(data))
+   }
   },[]);
 
   useEffect(() => {
     window.localStorage.setItem('users', JSON.stringify(users));
     window.localStorage.setItem('posts', JSON.stringify(posts));
-    window.localStorage.setItem('fetchUserOnes', (fetchUserOnes));
-    window.localStorage.setItem('fetchPostsOnes', (fetchPostsOnes));
-  }, [users, posts, fetchUserOnes, fetchPostsOnes]);
+  }, [users, posts]);
 
-  useEffect(() => {
-    setUsers(JSON.parse(window.localStorage.getItem('users')));
-    setPosts(JSON.parse(window.localStorage.getItem('posts')));
-    setFetchUserOnes((window.localStorage.getItem('fetchUserOnes')));
-    setFetchPostsOnes((window.localStorage.getItem('fetchPostsOnes')));
-  }, []);
-
-  function onUserClick(id){
+  
+  function onUserClick(e, id){
+    if(e.target.id === "delete"){ 
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
     setCurrentUserId(id);
+    }
   }
 
   function onUserDelete(id){
@@ -78,8 +70,6 @@ function App() {
   function onRouteChange(id){
     setCurrentUserId(id);
   }
-
-
 
   return (
     <div className="tc">

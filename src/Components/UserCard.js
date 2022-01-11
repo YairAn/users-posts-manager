@@ -3,10 +3,13 @@ import { Outlet, Link } from "react-router-dom";
 
 const UserCard = (props) => {
     return (
-      <div className='tc bg-light-blue dib br3 pa3 ma2 bw2 shadow-5'>
-       <span className='tc fr pointer bg-transparent' onClick={() => props.onDelete(props.id)}>&times;</span>
-       <img className='pointer' src={`https://robohash.org/${props.id}?size=100x100`}
-       onClick = {() => props.onClick(props.id)} />
+      <div
+       className='tc bg-light-blue dib br3 pa3 ma2 bw2 shadow-5 pointer'
+       name='main'
+       onClick = {(e) => props.onClick(e, props.id)}>
+       <span className='tc fr pointer bg-transparent' id='delete' onClick={() => props.onDelete(props.id)}>&times;</span>
+       <img src={`https://robohash.org/${props.id}?size=100x100`}
+        />
         <div>
             <h4>{`${props.name}`}</h4>
             <h4>{`(${props.userName})`}</h4>
