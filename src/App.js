@@ -86,6 +86,10 @@ function App() {
         : 
         <div>
          <Navigation onRouteChange={onRouteChange} />
+         
+         <img src={`https://robohash.org/${currenrUserId}?size=100x100`}
+          style={{backgroundColor: "white", borderColor: "black", borderStyle: "solid", borderRadius: "50%"}} />
+
          <h1>{`${users.find(item => item.id === currenrUserId).name}'s posts`}</h1>
          <hr></hr>     
          <CardList
