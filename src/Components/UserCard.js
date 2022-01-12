@@ -4,7 +4,7 @@ import { Outlet, Link } from "react-router-dom";
 const UserCard = (props) => {
     return (
       <div
-       className='tc bg-light-blue dib br3 pa3 ma2 bw2 shadow-5 pointer'
+       className='tc bg-dark-gray dib br3 pa3 ma2 bw2 shadow-5 pointer'
        name='main'
        onClick = {(e) => props.onClick(e, props.id)}>
        <span className='tc fr pointer bg-transparent' id='delete' onClick={() => props.onDelete(props.id)}>&times;</span>
