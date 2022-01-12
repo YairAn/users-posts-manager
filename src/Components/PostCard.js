@@ -1,11 +1,10 @@
 import EditCard from "./EditCard";
-import { useState, useEffect } from 'react';
 
 const PostCard = (props) => {
 
     return (
-      <div className='tc bg-dark-gray br3 pa3 ma2 bw2 shadow-5 pointer' >
-       <span className='tc fr pointer bg-transparent' onClick={() => props.onDelete(props.id)}>&times;</span>
+      <div className='tc bg-dark-gray br3 pa3 ma2 bw2 shadow-5' >
+       <span className='tc fr pointer bg-transparent f3' onClick={() => props.onDelete(props.id)}>&times;</span>
         <div>
             <EditCard
              id={props.id}

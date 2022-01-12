@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { useParams } from "react-router-dom";
 
 
-const Icon = ({id}) => <img src={`https://robohash.org/${id}?size=50x50`}/>;
+const Icon = ({id}) => <img src={`https://robohash.org/${id}?size=50x50`} alt=''/>;
 
 const Map = () => {
    let params = useParams();
